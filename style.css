@@ -107,7 +107,6 @@ body {
   position: relative;
 }
 
-/* Notebook paper texture background */
 body::before {
   content: "";
   position: fixed;
@@ -134,7 +133,6 @@ body::before {
   opacity: 0.3;
 }
 
-/* Floating doodle elements */
 body::after {
   content: "✏️ 📝 ✂️ 📎 🖍️ 📐 📏 🖊️";
   position: fixed;
@@ -237,6 +235,11 @@ body::after {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  -webkit-text-stroke: 0.01px transparent; /* Anti-blur */
+  font-synthesis: none;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: auto !important;
 }
 
 .editor-panel::before {
@@ -424,7 +427,6 @@ body::after {
   transform: rotate(8deg);
 }
 
-/* Social platform specific hover effects */
 .social-link[href*="instagram"]:hover {
   background: linear-gradient(
     45deg,
@@ -540,6 +542,11 @@ body::after {
   overflow-y: auto;
   flex: 1;
   height: 0;
+  -webkit-text-stroke: 0.01px transparent; /* Anti-blur */
+  font-synthesis: none;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: auto !important;
 }
 
 .form-section {
@@ -549,8 +556,9 @@ body::after {
   border: 2px solid var(--ink-dark);
   border-radius: 10px;
   position: relative;
-  transform: rotate(0.2deg);
+  transform: rotate(0deg) !important; /* Force to 0 for anti-blur */
   box-shadow: 3px 3px 0 var(--doodle-yellow);
+  will-change: auto !important;
 }
 
 .form-section::before {
@@ -570,7 +578,7 @@ body::after {
 }
 
 .form-section:nth-child(even) {
-  transform: rotate(-0.3deg);
+  transform: rotate(0deg) !important; /* Force to 0 for anti-blur */
   box-shadow: -3px 3px 0 var(--doodle-green);
 }
 
@@ -590,7 +598,7 @@ body::after {
   text-transform: uppercase;
   letter-spacing: 1px;
   position: relative;
-  transform: rotate(-0.5deg);
+  transform: rotate(0deg) !important; /* Anti-blur */
 }
 
 .form-section h2::after {
@@ -611,6 +619,8 @@ body::after {
 
 .form-group {
   margin-bottom: 15px;
+  transform: none !important; /* Anti-blur */
+  will-change: auto !important;
 }
 
 .form-group label {
@@ -620,7 +630,7 @@ body::after {
   font-weight: bold;
   color: var(--ink-medium);
   margin-bottom: 5px;
-  transform: rotate(-0.3deg);
+  transform: none !important; /* Anti-blur */
 }
 
 .form-group input,
@@ -630,12 +640,23 @@ body::after {
   padding: 12px;
   border: 2px solid var(--pencil-gray);
   border-radius: 10px;
-  font-family: "Times New Roman", serif;
-  font-size: 14px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; /* Changed for anti-blur testing */
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
   background: rgba(255, 255, 255, 0.9);
   color: var(--ink-dark);
   transition: all 0.3s ease;
-  transform: rotate(0.1deg);
+  transform: none !important; /* Anti-blur */
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
+  font-smooth: auto !important;
+  text-rendering: optimizeLegibility !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  image-rendering: -webkit-optimize-contrast;
+  zoom: 1 !important;
+  will-change: auto !important;
 }
 
 .form-group input:focus,
@@ -644,13 +665,45 @@ body::after {
   outline: none;
   border-color: var(--doodle-blue);
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
-  transform: rotate(0) scale(1.02);
+  transform: none !important; /* Anti-blur */
   background: white;
+  font-weight: 500;
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
 }
 
 .form-group textarea {
   min-height: 80px;
   resize: vertical;
+  line-height: 1.4;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder,
+.form-group select::placeholder {
+  font-family: "Patrick Hand", cursive;
+  font-size: 15px;
+  color: #000000;
+  opacity: 0.7;
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
+  text-rendering: optimizeLegibility !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+.form-group input:focus::placeholder,
+.form-group textarea:focus::placeholder {
+  opacity: 0.4;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+.form-group input:hover::placeholder,
+.form-group textarea:hover::placeholder {
+  opacity: 0.9;
 }
 
 /* ==========================================
@@ -858,11 +911,12 @@ body::after {
   padding: 15px;
   margin-bottom: 15px;
   position: relative;
-  transform: rotate(-0.1deg);
+  transform: none !important; /* Anti-blur */
+  will-change: auto !important;
 }
 
 .entry-item:nth-child(even) {
-  transform: rotate(0.2deg);
+  transform: none !important; /* Anti-blur */
   border-color: var(--doodle-green);
 }
 
@@ -923,6 +977,8 @@ body::after {
   align-items: flex-start;
   gap: 10px;
   margin-bottom: 10px;
+  transform: none !important; /* Anti-blur */
+  will-change: auto !important;
 }
 
 .bullet-point textarea {
@@ -931,8 +987,42 @@ body::after {
   border: 1px solid var(--pencil-gray);
   border-radius: 5px;
   padding: 8px;
-  font-family: "Times New Roman", serif;
-  font-size: 13px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; /* Changed for anti-blur */
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--ink-dark);
+  transform: none !important; /* Anti-blur */
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
+  font-smooth: auto !important;
+  text-rendering: optimizeLegibility !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  image-rendering: -webkit-optimize-contrast;
+  zoom: 1 !important;
+  will-change: auto !important;
+}
+
+.bullet-point textarea:focus {
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
+  transform: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.bullet-point textarea::placeholder {
+  font-family: "Patrick Hand", cursive;
+  font-size: 14px;
+  color: #000000;
+  opacity: 0.7;
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
+  text-rendering: optimizeLegibility !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
 }
 
 .bullet-remove {
@@ -1235,122 +1325,6 @@ body::after {
   border: 0;
 }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder,
-.form-group select::placeholder,
-.bullet-point textarea::placeholder {
-  font-family: "Patrick Hand", cursive;
-  font-size: 15px;
-  font-weight: 500;
-  color: #000000;
-  opacity: 0.7;
-  letter-spacing: 0.3px;
-}
-
-.form-group input:nth-child(2n)::placeholder {
-  font-family: "Patrick Hand", cursive;
-  color: #000000;
-}
-
-.form-group input:nth-child(3n)::placeholder {
-  font-family: "Indie Flower", cursive;
-  color: #000000;
-}
-
-.form-group textarea::placeholder {
-  font-family: "Architects Daughter", cursive;
-  font-size: 14px;
-  color: #000000;
-}
-
-.form-group input:focus::placeholder,
-.form-group textarea:focus::placeholder {
-  opacity: 0.4;
-}
-
-.form-group input:hover::placeholder,
-.form-group textarea:hover::placeholder {
-  opacity: 0.9;
-}
-
-/* Changed to Times New Roman for user input */
-.form-group input,
-.form-group textarea,
-.form-group select {
-  font-family: "Times New Roman", serif;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.2px;
-  color: #000000;
-}
-
-/* Changed to Times New Roman for user input */
-.form-group input[type="text"]:nth-of-type(odd) {
-  font-family: "Times New Roman", serif;
-}
-
-/* Changed to Times New Roman for user input */
-.form-group input[type="text"]:nth-of-type(even) {
-  font-family: "Times New Roman", serif;
-}
-
-/* Changed from cursive to serif */
-.form-group textarea {
-  font-family: "Times New Roman", serif;
-  line-height: 1.4;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  font-weight: 500;
-}
-
-/* Changed to Times New Roman for user input */
-.bullet-point textarea {
-  font-family: "Times New Roman", serif;
-  font-size: 14px;
-  color: #000000;
-}
-
-/* Already Times New Roman, changed from cursive to serif */
-.bullet-point textarea:focus {
-  font-family: "Times New Roman", serif;
-}
-
-/* Specific field placeholders - UNCHANGED */
-#fullname::placeholder {
-  font-family: "Dancing Script", cursive;
-  font-size: 17px;
-  color: #000000;
-  font-weight: 500;
-}
-
-#phone::placeholder,
-#email::placeholder,
-#linkedin::placeholder,
-#github::placeholder,
-#twitter::placeholder {
-  font-family: "Patrick Hand", cursive;
-  color: #000000;
-}
-
-/* Changed from cursive to serif for consistency */
-#summary::placeholder {
-  font-family: "Patrick Hand", serif;
-  font-size: 15px;
-  color: #000000;
-  line-height: 1.4;
-}
-
-#languages::placeholder,
-#frameworks::placeholder,
-#developerTools::placeholder,
-#libraries::placeholder {
-  font-family: "Patrick Hand", cursive;
-  color: #000000;
-  font-weight: 400;
-}
-
 /* ==========================================
    DARK THEME OVERRIDES
    ========================================== */
@@ -1385,9 +1359,9 @@ body::after {
 [data-theme="dark"] .form-group textarea,
 [data-theme="dark"] .form-group select {
   background: #0d1117;
-  color: var(--ink-dark);
+  color: #ffffff;
   border-color: var(--doodle-purple);
-  font-family: "Times New Roman", serif; /* Added Times New Roman */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; /* Consistent with light theme */
 }
 
 [data-theme="dark"] .form-group input:focus,
@@ -1414,9 +1388,9 @@ body::after {
 
 [data-theme="dark"] .bullet-point textarea {
   background: #0d1117;
-  color: var(--ink-dark);
+  color: #ffffff;
   border-color: var(--doodle-green);
-  font-family: "Times New Roman", serif; /* Added Times New Roman */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; /* Consistent with light theme */
 }
 
 [data-theme="dark"] .bullet-point textarea:focus {
@@ -1467,78 +1441,13 @@ body::after {
   box-shadow: 0 0 8px rgba(0, 184, 148, 0.5);
 }
 
-/* Dark theme placeholder styles */
 [data-theme="dark"] .form-group input::placeholder,
 [data-theme="dark"] .form-group textarea::placeholder,
 [data-theme="dark"] .form-group select::placeholder,
-[data-theme="dark"] .bullet-point textarea::placeholder,
-[data-theme="dark"] #fullname::placeholder,
-[data-theme="dark"] #phone::placeholder,
-[data-theme="dark"] #email::placeholder,
-[data-theme="dark"] #Lindedin::placeholder,
-[data-theme="dark"] #github::placeholder,
-[data-theme="dark"] #twitter::placeholder,
-[data-theme="dark"] #summary::placeholder,
-[data-theme="dark"] #languages::placeholder,
-[data-theme="dark"] #frameworks::placeholder,
-[data-theme="dark"] #developerTools::placeholder,
-[data-theme="dark"] #libraries::placeholder {
+[data-theme="dark"] .bullet-point textarea::placeholder {
+  font-family: "Patrick Hand", cursive;
   color: #ffffff;
   opacity: 0.8;
-}
-
-[data-theme="dark"] .form-group input,
-[data-theme="dark"] .form-group textarea,
-[data-theme="dark"] .form-group select,
-[data-theme="dark"] .bullet-point textarea {
-  color: #ffffff;
-  font-family: "Times New Roman", serif;
-}
-
-/* ==========================================
-   ANTI-BLUR OPTIMIZATIONS
-   ========================================== */
-
-.form-group input,
-.form-group textarea,
-.form-group select,
-.bullet-point textarea {
-  transform: none !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  filter: none !important;
-  backdrop-filter: none !important;
-  zoom: 1;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder,
-.form-group select::placeholder,
-.bullet-point textarea::placeholder {
-  transform: none !important;
-  animation: none !important;
-  transition: none !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus,
-.bullet-point textarea:focus {
-  transform: none !important;
-  filter: none !important;
-  backdrop-filter: none !important;
-}
-
-.form-group input:focus::placeholder,
-.form-group textarea:focus::placeholder,
-.form-group select:focus::placeholder,
-.bullet-point textarea:focus::placeholder {
-  transform: none !important;
-  animation: none !important;
-  transition: none !important;
 }
 
 /* ==========================================
@@ -1642,20 +1551,11 @@ body::after {
     width: 125%;
     height: auto;
     overflow: visible;
-    background-color: teal;
   }
 
   .form-group input::placeholder,
   .form-group textarea::placeholder {
     font-size: 14px;
-  }
-
-  #fullname::placeholder {
-    font-size: 16px;
-  }
-
-  #summary::placeholder {
-    font-size: 13px;
   }
 }
 
@@ -1712,10 +1612,6 @@ body::after {
   .form-group input::placeholder,
   .form-group textarea::placeholder {
     font-size: 13px;
-  }
-
-  #fullname::placeholder {
-    font-size: 15px;
   }
 }
 
